@@ -1,0 +1,13 @@
+{
+  "name": "terc-bindlib",
+  "version": "0.1.0",
+  "summary": "TERC Puppet Bind Library",
+  "author": "cammoraton",
+  "description": "Adds custom bind9 providers and types.",
+  "dependencies": [],
+  "types": [],
+  "checksums": {},
+  "source": "git://github.com/TERC/puppet-bindlib",
+  "project_page": "https://github.com/TERC/puppet-bindlib",
+  "license": "MIT or Apache 2.0"
+}
