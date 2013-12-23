@@ -5,7 +5,54 @@
   "author": "cammoraton",
   "description": "Adds custom bind9 providers and types.",
   "dependencies": [],
-  "types": [],
+  "types": [
+    {
+      "parameters": [
+        {
+          "name": "origin"
+        },
+        {
+          "name": "views"
+        },
+        {
+          "name": "ttl"
+        }
+      ],
+      "name": "resource_record"
+    },
+    {
+      "properties": [
+        {
+          "name": "content",
+          "doc": "      The desired contents of a file, as a string. This attribute is mutually\n      exclusive with `source`.\n"
+        },
+        {
+          "name": "current_serial"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "include",
+          "doc": "      $INCLUDE statements to insert at end of file.\n"
+        },
+        {
+          "name": "origins"
+        },
+        {
+          "name": "serial"
+        },
+        {
+          "name": "ttl",
+          "doc": "      Equivalent to $TTL.  Either numeric or a hash\n"
+        },
+        {
+          "name": "views"
+        }
+      ],
+      "name": "zone_file",
+      "doc": "    \n"
+    }
+  ],
   "checksums": {},
   "source": "git://github.com/TERC/puppet-bindlib",
   "project_page": "https://github.com/TERC/puppet-bindlib",

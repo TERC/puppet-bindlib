@@ -7,14 +7,16 @@ TERC Puppet Bind Library
 2. [Why - Reasoning for developing this module ](#why?)
 3. [Implementation - Summary of the under the hood implementation of the module ](#implementation)
 4. [Limitations - Known issues and limitations of the implementation ](#limitations)
-5. [Release Notes - Notes on the most recent updates to the module](#release-notes)
+5. [Contributing](#contributing)
 
 Overview
 --------
 
-The bindlib module provides
+The bindlib module provides the zone_file and resource_record types as well as a few associated functions.
 
-No manifest code is included.  This is pretty much pure ruby code for inclusion in other modules.
+Manifest code that is included is intended to be an example/starting point only.  If you use it, it is
+recommended that you fork it off into it's own module so that you may update the base providers/types
+in isolation.
 
 Why?
 --------
@@ -25,22 +27,16 @@ I thought:
 
 Implementation
 --------
-By extending the Puppet file type and using some providers we can merge templated or sourced content and modifications and
-have puppet treat this content as if it had been passed directly.
 
-The changes themeselves are applied via the XmlLens class, which fakes being augeas.  This is accomplished via the standard
-ruby REXML library.  Upshot of this is we can add in things like sorting.
+
 
 Limitations
 --------
-I don't have a complete windows puppet kit and so while we extend the windows provider and it should work, I can't actually 
-test it.
-
 Property fix is called via send on object creation.  This may create a security issue when a file is first created if the properties are
 not correctly set, although this should get fixed on the next puppet run.
 
-Release Notes
---------
-####  v0.1.0
-- Initial Release
+Does not respect resource record classes.
 
+Contributing
+-------
+Feel free to contact me directly or submit a pull request.  I also hang out on IRC an awful lot.
