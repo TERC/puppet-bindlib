@@ -1,4 +1,3 @@
-
 Puppet::Type.newtype(:resource_record) do
   desc <<-'EOT'
   EOT

@@ -1,9 +1,9 @@
 {
   "name": "terc-bindlib",
   "version": "0.1.0",
-  "summary": "TERC Puppet Bind Library",
+  "summary": "TERC Puppet BIND Library",
   "author": "cammoraton",
-  "description": "Adds custom bind9 providers and types.",
+  "description": "Adds custom BIND providers and types.",
   "dependencies": [],
   "types": [
     {
