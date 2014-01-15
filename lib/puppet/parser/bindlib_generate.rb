@@ -1,1 +1,0 @@
-require 'puppet/parser/functions'
