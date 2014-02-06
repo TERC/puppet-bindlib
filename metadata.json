@@ -17,72 +17,17 @@
         },
         {
           "name": "origin"
-        },
-        {
-          "name": "a",
-          "doc": "Address record per RFC1035"
-        },
-        {
-          "name": "aaaa",
-          "doc": "IPv6 address record per RFC3596"
-        },
-        {
-          "name": "cname",
-          "doc": "Canonical name record per RFC1035"
-        },
-        {
-          "name": "mx",
-          "doc": "Mail exchange record per RFC1035"
-        },
-        {
-          "name": "ns",
-          "doc": "Name server record per RFC1035"
-        },
-        {
-          "name": "ptr",
-          "doc": "Pointer record per RFC1035"
         }
       ],
       "name": "dns_rr"
     },
     {
-      "properties": [
-        {
-          "name": "content",
-          "doc": "      The desired contents of a file, as a string. This attribute is mutually\n      exclusive with `source`.\n"
-        },
-        {
-          "name": "serial"
-        }
-      ],
       "parameters": [
         {
-          "name": "origins"
-        },
-        {
-          "name": "soa"
-        },
-        {
-          "name": "manage_serial",
-          "doc": "      Whether the provider should automatically increment the serial if the resource is refreshed.\n      \n      Defaults to true\n"
-        },
-        {
-          "name": "views"
-        },
-        {
-          "name": "include",
-          "doc": "      $INCLUDE statements to insert at end of file.\n"
-        },
-        {
-          "name": "generate",
-          "doc": "      $GENERATE statements to insert at end of file before include.  Included for completeness\n"
-        },
-        {
-          "name": "ttl",
-          "doc": "      Equivalent to $TTL.  Either numeric or a hash\n"
+          "name": "zone"
         }
       ],
-      "name": "zone_file",
+      "name": "dns_zone",
       "doc": "    \n"
     }
   ],

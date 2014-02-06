@@ -17,7 +17,7 @@ shared_examples_for "mx mutually exclusive" do
 end
 
 shared_examples "mx record" do
-  let(:params) {{ :name => "test.example.com", :mx   => "mx.example.com." }}
+  let(:params) {{ :name => "test.example.com", :mx => "mx.example.com." }}
   
   include_examples "resource record"
                          

@@ -20,12 +20,4 @@ shared_examples "ns record" do
   let(:params) {{ :name => "test.example.com", :ns => "ns.example.com." }}
   
   include_examples "resource record"
-  
-  (TYPES -  [ :cname, :a, :aaaa, :ptr, :mx, :ns ]).each do |include|
-    include_examples "#{include} not mutually exclusive"
-  end
-  
-  [ :cname, :a, :aaaa, :ptr, :mx ].each do |exclude|
-    include_examples "#{exclude} mutually exclusive"
-  end
 end
