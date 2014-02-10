@@ -10,6 +10,15 @@ module Puppet_X
       # Our hostname regex
       HOSTNAME_REGEX = /^(([a-zA-Z0-9][a-zA-Z0-9\-]{0,62})\.)+([a-zA-Z0-9][a-zA-Z0-9\-]{0,62})[\.]?$/
       
+      # Example valid records for each validation type
+      VALID_RECORD_LOOKUP = {
+        :ipv4             => "192.168.0.1",
+        :ipv6             => "2001:db8::1",
+        :hostname         => "test.example.com",
+        :hostnameabsolute => "test.example.com.",
+        :mx               => { :value => "mx.example.com.", :priority => 10 },
+      }  
+      
       RECORD_LOOKUP_TABLE = {  
         :a => {
           :desc       => "",
@@ -48,8 +57,7 @@ module Puppet_X
       DEFAULT_MX_PRIORITY = 10
       
       # Sugar
-      RECORD_TYPES = Puppet_X::Bindlib::Constants::RECORD_LOOKUP_TABLE.keys
-      
+      RECORD_TYPES = Puppet_X::Bindlib::Constants::RECORD_LOOKUP_TABLE.keys 
     end
   end
 end

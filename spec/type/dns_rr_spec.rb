@@ -28,27 +28,24 @@ describe Puppet::Type.type(:dns_rr) do
   ::Puppet_X::Bindlib::Constants::RECORD_TYPES.each do |type|
     describe "#{type}" do
       let(:testparam) { type }
-      
       # Universal test  
       it "should exist as a parameter" do
         testobject.parameters.include?(testparam).should be_true
       end
       
-      # Test exclusions
-      ::Puppet_X::Bindlib::Constants::RECORD_LOOKUP_TABLE[type][:exclusions].each do |exclude|
-        include_examples "#{exclude} mutually exclusive"
-      end
+      # Resource specific tests(parameters/etc.)
+      begin
+        include_examples "#{type} record"
+      rescue ArgumentError => e
+        raise e unless !!(e.to_s =~ /Could not find shared examples/)
+        
+        # Note that a ton of things are going to fail
+        it "should have resource specific tests via a shared_example named \"#{type} record\""
+      end 
       
-      ( ::Puppet_X::Bindlib::Constants::RECORD_TYPES -
-        ::Puppet_X::Bindlib::Constants::RECORD_LOOKUP_TABLE[type][:exclusions] ).each do |include|
-        include_examples "#{include} not mutually exclusive"
-      end
-
-      # Now we load validation and resource specific tests - if present.
-      # It's kind of kludgy but the result should be a bit clearer to those less familiar with ruby
-      # this way - it just won't test missing shared examples rather than bombing out
-      # from the argument error to include_examples.  Instead it will throw up a pending task
-      
+      # Include the resource record
+      include_examples "resource record"
+         
       # Test validations
       begin
         include_examples "#{::Puppet_X::Bindlib::Constants::RECORD_LOOKUP_TABLE[type][:validation]} validations"
@@ -57,12 +54,26 @@ describe Puppet::Type.type(:dns_rr) do
         it "should test validations via a shared_example named \"#{::Puppet_X::Bindlib::Constants::RECORD_LOOKUP_TABLE[type][:validation]} validations\""
       end
       
-      # Resource specific tests(parameters/etc.)
-      begin
-        include_examples "#{type} record"
-      rescue ArgumentError => e
-        raise e unless !!(e.to_s =~ /Could not find shared examples/)
-        it "should have resource specific tests via a shared_example named \"#{type} record\""
+      # Test exclusions
+      ::Puppet_X::Bindlib::Constants::RECORD_LOOKUP_TABLE[type][:exclusions].each do |exclude|
+        it "should be mutually exclusive with #{exclude}" do
+          validation = ::Puppet_X::Bindlib::Constants::RECORD_LOOKUP_TABLE[exclude][:validation]
+          expect {
+            params[exclude] = ::Puppet_X::Bindlib::Constants::VALID_RECORD_LOOKUP[validation.to_sym]
+            testobject.new(params) 
+          }.to raise_error
+        end
+      end
+      
+      ( ::Puppet_X::Bindlib::Constants::RECORD_TYPES -
+        ::Puppet_X::Bindlib::Constants::RECORD_LOOKUP_TABLE[type][:exclusions] ).each do |include|
+        it "should not be mutually exclusive with #{include}" do
+          validation = ::Puppet_X::Bindlib::Constants::RECORD_LOOKUP_TABLE[include][:validation]
+          expect {
+            params[include] = ::Puppet_X::Bindlib::Constants::VALID_RECORD_LOOKUP[validation.to_sym]
+            testobject.new(params) 
+          }.not_to raise_error
+        end
       end
     end
   end
