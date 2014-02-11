@@ -10,6 +10,10 @@ module Puppet_X
       # Our hostname regex
       HOSTNAME_REGEX = /^(([a-zA-Z0-9][a-zA-Z0-9\-]{0,62})\.)+([a-zA-Z0-9][a-zA-Z0-9\-]{0,62})[\.]?$/
       
+      # Which params to inherit from file
+      INHERITED_FILE_PARAMS = []
+      INHERITED_FILE_PROPERTIES = []
+       
       # Example valid records for each validation type
       VALID_RECORD_LOOKUP = {
         :ipv4             => "192.168.0.1",

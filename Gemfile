@@ -1,5 +1,7 @@
 source "http://rubygems.org"
 
+#gem 'simpleIDN'
+
 group :development, :test do
   gem 'rake'
   gem 'rspec'

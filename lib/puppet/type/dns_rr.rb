@@ -68,4 +68,6 @@ Puppet::Type.newtype(:dns_rr) do
       end
     end
   end
+  
+  # Autorequire the DNS zone resource - not strictly needed yet, but why not
 end
