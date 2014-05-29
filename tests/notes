@@ -1,0 +1,70 @@
+multizone?
+
+SOA required per origin?
+PTR
+Default timeouts/ttls
+How to munge a name value or make isnamepar a combo of parameters
+
+A, AAAA, MX, NS
+Automatic PTR or specify?
+
+SPLIT HORIZON
+
+zonefile { '/etc/named/zones.internal/db.terc':
+  path    => $name,
+  domains => [ 'terc.edu' ], # Generate function, ptr is nothing but numbers and dots
+  zones   => [ 'internal' ], # Optional
+  authorities => [ ],
+  ttl     => 36000,
+  refresh => ,
+  yada, yada ],
+  # need to mix in templates or generation to cut down on number of resources
+}
+
+
+zone_file { # path
+  path,     # Default to name
+  origin / origins, # Need a function to autogen sub origins for PTR
+  ttl,      # Number or hash
+  include,  # File resources - added last
+  views,    # Metaparams
+  serial => "auto", # different serial methods
+} # require ns / soa?
+
+# RR or resource_record? 
+resource_record { 'www',
+  origin => 'terc.edu', # Collected or autocomputed from name
+  a  => '140.245.96.1', # Shortest match first - string or array
+  mx => 'mx.terc.edu',
+  ns => '',
+  soa => '',
+  views => [ 'internal' ], # Default to all, metaparam
+}
+
+# Warn
+
+dnsdirective
+
+Fact for searchdomain from resolv.conf
+
+$INCLUDE
+$GENERATE
+
+
+views are collector metaparams
+zonefile is a container
+automunge resource name  zone:view:name
+deliver template as a file
+
+local scope variable zone which replaces
+
+$ORIGIN whitespace
+
+^\$ORIGIN\s+(.*)$
+
+@       IN      SOA     localhost. root.localhost. (
+                              1         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL

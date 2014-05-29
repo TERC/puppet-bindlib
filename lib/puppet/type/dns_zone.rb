@@ -21,30 +21,6 @@ Puppet::Type.newtype(:dns_zone) do
     #isnamevar
   end
 
-  # Inherit certain things from file
-  # Parameters - appear to require a lookup
-  Puppet::Type::File.parameters.each do |inherit|
-    if ::Puppet_X::Bindlib::Constants::INHERITED_FILE_PARAMS.include?(inherit)
-      klass = "Puppet::Type::File::Parameter#{inherit.to_s.capitalize}"
-      begin
-        newparam(inherit, :parent => self.const_get(klass)) do
-          desc self.const_get(klass).doc
-        end
-      rescue 
-        warning "Inheritance assumption case problem: #{klass} undefined but not ignored."
-      end
-    end
-  end
-    
-  # Properties are easier as the class is in the instance variable
-  Puppet::Type::File.properties.each do |inherit|
-    if ::Puppet_X::Bindlib::Constants::INHERITED_FILE_PROPERTIES.include?(inherit.name)
-      newproperty(inherit.name.to_sym, :parent => inherit) do
-        desc inherit.doc
-      end
-    end
-  end
-  
   # Magic
   
   def gather_resources
@@ -58,6 +34,5 @@ Puppet::Type.newtype(:dns_zone) do
   end
   
   validate do
-    
   end
 end
